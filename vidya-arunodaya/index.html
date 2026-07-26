@@ -87,7 +87,6 @@ model-viewer{width:100%;height:70vh;background:radial-gradient(circle at 50% 40%
 
 </style></head><body>
 <div id="app"><div style="font-family:sans-serif;padding:40px;text-align:center;color:#5b6885">Loading Vidya Arunodaya…</div></div>
-<noscript><div style="font-family:sans-serif;padding:40px;text-align:center;color:#b02a3a">This app needs JavaScript. Open index.html in Chrome, Edge or Firefox.</div></noscript>
 <script>window.addEventListener("error",function(e){var a=document.getElementById("app");if(a&&a.textContent.indexOf("Loading")>-1){a.innerHTML="<div style='font-family:sans-serif;padding:40px;color:#b02a3a'><h2>Could not start</h2><p>"+ (e.message||"script error") +"</p></div>";}});</script>
 <script>
 /* Vidya Arunodaya — offline curriculum manifest.
@@ -272,6 +271,17 @@ const CURRICULUM = {
         ],
       },
       {
+        ch: 8, title: "Cell — Structure and Functions", titleHi: "कोशिका — संरचना और कार्य",
+        lesson: "lessons/cell-3d.html", sim: null, model: null, original: true,
+        ncert: "https://ncert.nic.in/textbook/pdf/hesc108.pdf",
+        notes: "OUR ORIGINAL interactive 3D lesson: a rotatable animal cell. Tap each part — nucleus, mitochondria, endoplasmic reticulum, Golgi, ribosomes, vacuole — to see what it does. Every cell is a tiny living machine.",
+        notesHi: "हमारा मौलिक 3D पाठ: घूमने वाली जंतु कोशिका। हर भाग पर टैप कीजिए — केंद्रक, माइटोकॉन्ड्रिया, गॉल्जी — और उसका कार्य जानिए।",
+        quiz: [
+          { q: "The control centre of the cell is the…", opts: ["Nucleus", "Vacuole", "Membrane"], a: 0 },
+          { q: "Which part is the 'powerhouse' of the cell?", opts: ["Ribosome", "Mitochondria", "Golgi"], a: 1 },
+        ],
+      },
+      {
         ch: 16, title: "Light", titleHi: "प्रकाश",
         sim: "bending-light", model: null,
         ncert: "https://ncert.nic.in/textbook/pdf/hesc116.pdf",
@@ -377,21 +387,28 @@ const CURRICULUM = {
         quiz: [],
       },
       {
-        ch: 2, title: "Planet Earth — photoreal 3D (flagship)", titleHi: "पृथ्वी — फ़ोटोरियल 3D",
+        ch: 2, title: "The Animal Cell — clickable 3D (flagship)", titleHi: "जंतु कोशिका — क्लिक करने योग्य 3D",
+        lesson: "lessons/cell-3d.html", sim: null, model: null, original: true,
+        notes: "OUR original interactive 3D cell — rotate it and tap each organelle (nucleus, mitochondria, Golgi, ER, ribosomes) to learn its job. Built by us, owned by the State, fully offline.",
+        notesHi: "हमारी मौलिक इंटरैक्टिव 3D कोशिका — घुमाइए और हर अंगक पर टैप कीजिए।",
+        quiz: [],
+      },
+      {
+        ch: 3, title: "Planet Earth — photoreal 3D (flagship)", titleHi: "पृथ्वी — फ़ोटोरियल 3D",
         lesson: "lessons/earth-3d.html", sim: null, model: null, original: true,
         notes: "OUR flagship original 3D lesson — photoreal rotating Earth, clouds, atmosphere, orbiting Moon and clickable locations. This is the world-class standard we build original content to; it runs fully offline.",
         notesHi: "हमारा प्रमुख मौलिक 3D पाठ — घूमती पृथ्वी, बादल, वायुमंडल और चंद्रमा।",
         quiz: [],
       },
       {
-        ch: 3, title: "Animated human figure — 3D viewer", titleHi: "मानव आकृति — 3D",
+        ch: 4, title: "Animated human figure — 3D viewer", titleHi: "मानव आकृति — 3D",
         model: "lessons/model3d-human.html", sim: null, sampleModel: true,
         notes: "Drag to rotate, scroll or pinch to zoom, watch the animation — the viewer runs fully offline from the board's storage. In the deployed library, real CBSE 3D models (organs, machines, molecules) plug into this same viewer.",
         notesHi: "इस 3D मॉडल को घुमाएँ और ज़ूम करें — पूरी तरह ऑफ़लाइन।",
         quiz: [],
       },
       {
-        ch: 4, title: "Original 3D lesson — The Human Eye", titleHi: "मानव नेत्र — मौलिक 3D पाठ",
+        ch: 5, title: "Original 3D lesson — The Human Eye", titleHi: "मानव नेत्र — मौलिक 3D पाठ",
         lesson: "lessons/eye-class10.html", sim: null, model: null, original: true,
         notes: "OUR ORIGINAL 3D lesson reused here to show the difference between a plain model viewer and a full built lesson: a rotatable eye, clickable parts, and five interactive rooms — the standard we build original content to.",
         notesHi: "हमारा मौलिक 3D पाठ — नेत्र के भागों को घुमाकर देखें।",
