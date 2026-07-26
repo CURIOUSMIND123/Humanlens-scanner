@@ -8,7 +8,17 @@ const SIM_NAMES = {
   "circuit-construction-kit-dc": "Circuit Construction Kit", "states-of-matter-basics": "States of Matter",
   "gravity-and-orbits": "Gravity and Orbits", "wave-on-a-string": "Wave on a String",
   "fraction-matcher": "Fraction Matcher",
+  "forces-and-motion-basics": "Forces and Motion", "energy-skate-park-basics": "Energy Skate Park",
+  "bending-light": "Bending of Light", "waves-intro": "Waves — Introduction", "faradays-law": "Faraday's Law",
+  "projectile-motion": "Projectile Motion", "pendulum-lab": "Pendulum Lab", "hookes-law": "Hooke's Law",
+  "ph-scale-basics": "pH Scale", "molecule-shapes-basics": "Molecule Shapes", "states-of-matter": "States of Matter",
+  "isotopes-and-atomic-mass": "Isotopes & Atomic Mass", "natural-selection": "Natural Selection",
+  "gene-expression-essentials": "Gene Expression", "fractions-intro": "Fractions — Introduction",
+  "area-model-multiplication": "Area Model Multiplication", "graphing-lines": "Graphing Lines",
+  "number-line-integers": "Integers on the Number Line", "trig-tour": "Trigonometry Tour", "concentration": "Concentration",
 };
+// sims that we downloaded a real Hindi version for (others fall back to English)
+const HI_SIMS = new Set(["balancing-chemical-equations","build-an-atom","geometric-optics-basics","circuit-construction-kit-dc","states-of-matter-basics","gravity-and-orbits","wave-on-a-string","fraction-matcher","forces-and-motion-basics","bending-light","states-of-matter","ph-scale-basics","natural-selection","fractions-intro","projectile-motion","waves-intro","number-line-integers","concentration"]);
 
 function setLang(l) { LANG = l; render(); }
 
@@ -140,7 +150,7 @@ function lesson(cls, sub, i) {
     document.querySelectorAll("#tabbar button").forEach((b) => b.classList.toggle("on", b.dataset.tab === tab));
     attrib.innerHTML = "";
     if (tab === "sim") {
-      const loc = LANG === "hi" ? "hi" : "en";
+      const loc = (LANG === "hi" && HI_SIMS.has(ch.sim)) ? "hi" : "en";
       const file = `sims/${ch.sim}_${loc}.html`;
       stage.innerHTML = `<iframe src="${file}" allow="fullscreen" title="${ch.sim}"></iframe>`;
       attrib.innerHTML = `Simulation: <b>${SIM_NAMES[ch.sim] || ch.sim}</b> — © PhET Interactive Simulations, University of Colorado Boulder, licensed CC&nbsp;BY&nbsp;4.0 (phet.colorado.edu). Bundled offline with attribution. ${LANG === "hi" ? "हिंदी संस्करण।" : ""}`;
@@ -151,8 +161,19 @@ function lesson(cls, sub, i) {
       stage.innerHTML = `<iframe src="${ch.model}" allow="fullscreen" title="3D model"></iframe>`;
       attrib.innerHTML = ch.sampleModel ? `Sample 3D asset shown to demonstrate the fully-offline interactive viewer (drag to rotate, scroll to zoom, animated). The deployed library plugs real CBSE 3D models (organs, molecules, machines) into this same viewer. Sample model: Khronos glTF, royalty-free.` : "";
     } else if (tab === "read") {
-      stage.innerHTML = `<div class="readbox"><p>${notes}</p>${ch.ncert ? `<a class="off" href="${ch.ncert}" target="_blank" rel="noreferrer">🔗 ${t("official")}</a> <span style="font-size:12px;color:var(--dim)">(opens when online)</span>` : ""}</div>`;
-      attrib.innerHTML = `Notes are original summaries written for this pack. Official NCERT chapter text opens from ncert.nic.in when online — never copied or repackaged.`;
+      stage.innerHTML = `
+        <div class="chapter">
+          <div class="chapter-head">
+            <span class="chapter-meta">${cls} · ${sub} · Chapter ${ch.ch}</span>
+            <h2 class="chapter-title">${title}</h2>
+          </div>
+          <div class="chapter-body">
+            <div class="keycard"><span class="keylab">Key idea</span><p>${notes}</p></div>
+            ${ch.ncert ? `<a class="official-btn" href="${ch.ncert}" target="_blank" rel="noreferrer">Read the full official NCERT chapter <span>→</span></a>
+            <div class="official-note">Opens the official NCERT chapter online. We link to the source — we never copy it.</div>` : ""}
+          </div>
+        </div>`;
+      attrib.innerHTML = "";
     } else if (tab === "quiz") {
       renderQuiz(stage, ch.quiz);
     }
